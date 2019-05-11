@@ -74,6 +74,11 @@
                 <span asp-validation-for="RefereeCategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="RefereeCategoryTypeId" class="control-label"></label>
+                <select asp-for="RefereeCategoryTypeId" class="form-control" asp-items="ViewBag.RefereeCategoryTypeId"></select>
+                <span asp-validation-for="RefereeCategoryTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="RefereeDistriktId" class="control-label"></label>
                 <select asp-for="RefereeDistriktId" class="form-control" asp-items="ViewBag.RefereeDistriktId"></select>
                 <span asp-validation-for="RefereeDistriktId" class="text-danger"></span>

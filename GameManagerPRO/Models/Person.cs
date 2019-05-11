@@ -55,8 +55,13 @@ namespace ProPayment.Models
         public RefereeCategory RefereeCategory { get; set; }
         public int? RefereeCategoryId { get; set; }
 
+        [Display(Name = "Domarkategori Typ")]
+        public RefereeCategoryType RefereeCategoryType { get; set; }
+        public int? RefereeCategoryTypeId { get; set; }
+
         [Display(Name = "Domardistrikt")]
         public RefereeDistrikt RefereeDistrikt { get; set; }
         public int? RefereeDistriktId { get; set; }
+        
     }
 }

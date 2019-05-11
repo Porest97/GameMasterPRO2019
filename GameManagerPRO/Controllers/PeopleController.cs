@@ -22,7 +22,7 @@ namespace GameManagerPRO.Controllers
         // GET: People
         public async Task<IActionResult> Index()
         {
-            var gameManagerPROContext = _context.Person.Include(p => p.RefereeCategory).Include(p => p.RefereeDistrikt).Include(p => p.RefereeType);
+            var gameManagerPROContext = _context.Person.Include(p => p.RefereeCategory).Include(p => p.RefereeCategoryType).Include(p => p.RefereeDistrikt).Include(p => p.RefereeType);
             return View(await gameManagerPROContext.ToListAsync());
         }
 
@@ -36,6 +36,7 @@ namespace GameManagerPRO.Controllers
 
             var person = await _context.Person
                 .Include(p => p.RefereeCategory)
+                .Include(p => p.RefereeCategoryType)
                 .Include(p => p.RefereeDistrikt)
                 .Include(p => p.RefereeType)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -51,6 +52,7 @@ namespace GameManagerPRO.Controllers
         public IActionResult Create()
         {
             ViewData["RefereeCategoryId"] = new SelectList(_context.RefereeCategory, "Id", "RefereeCategoryName");
+            ViewData["RefereeCategoryTypeId"] = new SelectList(_context.RefereeCategoryType, "Id", "RefereeCategoryTypeName");
             ViewData["RefereeDistriktId"] = new SelectList(_context.RefereeDistrikt, "Id", "RefereeDistriktName");
             ViewData["RefereeTypeId"] = new SelectList(_context.RefereeType, "Id", "RefereeTypeName");
             return View();
@@ -61,7 +63,7 @@ namespace GameManagerPRO.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,StreetAddress,ZipCode,County,Country,Ssn,PhoneNumber,Email,RefereeNumber,RefereeTypeId,RefereeCategoryId,RefereeDistriktId")] Person person)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,StreetAddress,ZipCode,County,Country,Ssn,PhoneNumber,Email,RefereeNumber,RefereeTypeId,RefereeCategoryId,RefereeDistriktId,RefereeCategoryTypeId")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +72,7 @@ namespace GameManagerPRO.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["RefereeCategoryId"] = new SelectList(_context.RefereeCategory, "Id", "RefereeCategoryName", person.RefereeCategoryId);
+            ViewData["RefereeCategoryTypeId"] = new SelectList(_context.RefereeCategoryType, "Id", "RefereeCategoryTypeName", person.RefereeCategoryTypeId);
             ViewData["RefereeDistriktId"] = new SelectList(_context.RefereeDistrikt, "Id", "RefereeDistriktName", person.RefereeDistriktId);
             ViewData["RefereeTypeId"] = new SelectList(_context.RefereeType, "Id", "RefereeTypeName", person.RefereeTypeId);
             return View(person);
@@ -89,6 +92,7 @@ namespace GameManagerPRO.Controllers
                 return NotFound();
             }
             ViewData["RefereeCategoryId"] = new SelectList(_context.RefereeCategory, "Id", "RefereeCategoryName", person.RefereeCategoryId);
+            ViewData["RefereeCategoryTypeId"] = new SelectList(_context.RefereeCategoryType, "Id", "RefereeCategoryTypeName", person.RefereeCategoryTypeId);
             ViewData["RefereeDistriktId"] = new SelectList(_context.RefereeDistrikt, "Id", "RefereeDistriktName", person.RefereeDistriktId);
             ViewData["RefereeTypeId"] = new SelectList(_context.RefereeType, "Id", "RefereeTypeName", person.RefereeTypeId);
             return View(person);
@@ -99,7 +103,7 @@ namespace GameManagerPRO.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,StreetAddress,ZipCode,County,Country,Ssn,PhoneNumber,Email,RefereeNumber,RefereeTypeId,RefereeCategoryId,RefereeDistriktId")] Person person)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,StreetAddress,ZipCode,County,Country,Ssn,PhoneNumber,Email,RefereeNumber,RefereeTypeId,RefereeCategoryId,RefereeDistriktId,RefereeCategoryTypeId")] Person person)
         {
             if (id != person.Id)
             {
@@ -127,6 +131,7 @@ namespace GameManagerPRO.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["RefereeCategoryId"] = new SelectList(_context.RefereeCategory, "Id", "RefereeCategoryName", person.RefereeCategoryId);
+            ViewData["RefereeCategoryTypeId"] = new SelectList(_context.RefereeCategoryType, "Id", "RefereeCategoryTypeName", person.RefereeCategoryTypeId);
             ViewData["RefereeDistriktId"] = new SelectList(_context.RefereeDistrikt, "Id", "RefereeDistriktName", person.RefereeDistriktId);
             ViewData["RefereeTypeId"] = new SelectList(_context.RefereeType, "Id", "RefereeTypeName", person.RefereeTypeId);
             return View(person);
@@ -142,6 +147,7 @@ namespace GameManagerPRO.Controllers
 
             var person = await _context.Person
                 .Include(p => p.RefereeCategory)
+                .Include(p => p.RefereeCategoryType)
                 .Include(p => p.RefereeDistrikt)
                 .Include(p => p.RefereeType)
                 .FirstOrDefaultAsync(m => m.Id == id);

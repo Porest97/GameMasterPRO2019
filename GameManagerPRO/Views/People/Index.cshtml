@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>People</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -47,6 +47,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RefereeCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RefereeCategoryType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RefereeDistrikt)
@@ -92,6 +95,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RefereeCategory.RefereeCategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefereeCategoryType.RefereeCategoryTypeName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RefereeDistrikt.RefereeDistriktName)

@@ -34,5 +34,7 @@ namespace GameManagerPRO.Models
         public DbSet<GameManagerPRO.Models.PROGame> PROGame { get; set; }
 
         public DbSet<GameManagerPRO.Models.Tournament> Tournament { get; set; }
+
+        public DbSet<ProPayment.Models.RefereeCategoryType> RefereeCategoryType { get; set; }
     }
 }
